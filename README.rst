@@ -710,6 +710,16 @@ Example: place the following in your ``~/.bashrc``
 
 	SOPS_GPG_KEYSERVER = 'gpg.example.com'
 
+Specify a different GPG home directory
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, ``sops``uses the ``GNUPGHOME`` environment variable for the gpg home directory
+to look for keyring.
+To specify a specific directory only for sops, use this environment variable:
+
+.. code:: bash
+
+    SOPS_GPG_HOME = '/Path/to/my/directory'
 
 Key groups
 ~~~~~~~~~~

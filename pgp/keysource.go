@@ -248,13 +248,17 @@ func (key *MasterKey) ToString() string {
 }
 
 func (key *MasterKey) gpgHome() string {
-	dir := os.Getenv("GNUPGHOME")
+	dir := os.Getenv("SOPS_GPG_HOME")
 	if dir == "" {
-		usr, err := user.Current()
-		if err != nil {
-			return path.Join(os.Getenv("HOME"), "/.gnupg")
+		dir := os.Getenv("GNUPGHOME")
+		if dir == "" {
+			usr, err := user.Current()
+			if err != nil {
+				return path.Join(os.Getenv("HOME"), "/.gnupg")
+			}
+			return path.Join(usr.HomeDir, ".gnupg")
 		}
-		return path.Join(usr.HomeDir, ".gnupg")
+		return dir
 	}
 	return dir
 }
